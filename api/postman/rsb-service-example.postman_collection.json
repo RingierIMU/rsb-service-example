@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "9393b5d2-45e0-4c99-9902-c6c1befa47a3",
+		"name": "rsb-service-example",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Environment: Get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{RSB_SERVICE_EXAMPLE}}/",
+					"host": [
+						"{{RSB_SERVICE_EXAMPLE}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Backup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"events\": \"UserCreated\",\n    \"venture_config_id\": \"12345678-1234-4321-1234-abcdabcdabcd\",\n    \"venture_reference\": \"87654321-4321-4321-dcba-987654321cba\",\n    \"created_at\": \"2019-11-01T08:30:00+00:00\",\n    \"culture\": \"en_GB\",\n    \"action_type\": \"api\",\n    \"action_reference\": \"123456\",\n    \"version\": \"1.0.0\",\n    \"route\": \"\",\n    \"payload\": {\n        \"Users\": [\n            {\n                \"reference\": \"123456\",\n                \"advertiser_reference\": \"\",\n                \"name\": \"Max Mustermann\",\n                \"email\": \"max.mustermann@mailinator.com\",\n                \"email_verified\": true,\n                \"mobile\": \"+1987654321\",\n                \"mobile_verified\": true,\n                \"status\": \"verified\",\n                \"products\": [],\n                \"created_at\": \"2019-11-01T08:30:00+00:00\",\n                \"updated_at\": \"2019-11-01T08:30:00+00:00\",\n                \"billing_type\": \"free\",\n                \"culture\": \"vi\",\n                \"data_properties\": {\n                    \"old_id\": \"\",\n                    \"location\": null,\n                    \"address\": [],\n                    \"alternative_contact_details\": []\n                }\n            }\n        ]\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{RSB_SERVICE_EXAMPLE}}/api/events",
+					"host": [
+						"{{RSB_SERVICE_EXAMPLE}}"
+					],
+					"path": [
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
