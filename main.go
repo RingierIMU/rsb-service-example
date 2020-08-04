@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	_ "github.com/RingierIMU/rsb-service-example/crypt"
 	"net/http"
 	"os"
 )
