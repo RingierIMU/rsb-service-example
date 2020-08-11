@@ -9,47 +9,43 @@ import (
 	"golang.org/x/crypto/openpgp/armor"
 	_ "golang.org/x/crypto/ripemd160"
 	"io"
-	"os"
 )
 
-func encryptToFile(filename string) {
+func Encrypt(data []byte) ([]byte, error) {
 	pubKey := decodePublicKey(publicKey)
 	privKey := decodePrivateKey(privateKey)
 
 	to := createEntityFromKeys(pubKey, privKey)
 
-	ecryptedFile, err := os.Create(filename)
-	if err != nil {
-		fmt.Println("Unable to create file: " + err.Error())
-	}
-	defer ecryptedFile.Close()
+	ecryptedBuffer := new(bytes.Buffer)
 
-	w, err := armor.Encode(ecryptedFile, "Message", make(map[string]string))
+	encryptedBufferWriter, err := armor.Encode(ecryptedBuffer, BlockType, make(map[string]string))
 	if err != nil {
 		fmt.Println("Error creating armor: " + err.Error())
-		return
+		return nil, err
 	}
-	defer w.Close()
 
-	plain, err := openpgp.Encrypt(w, []*openpgp.Entity{to}, nil, nil, nil)
+	plain, err := openpgp.Encrypt(encryptedBufferWriter, []*openpgp.Entity{to}, nil, nil, nil)
 	if err != nil {
 		fmt.Println("Error creating entity for encryption: " + err.Error())
-		return
+		return nil, err
 	}
-	defer plain.Close()
 
 	compressed, err := gzip.NewWriterLevel(plain, gzip.BestCompression)
 	if err != nil {
 		fmt.Println("Invalid compression level: " + err.Error())
-		return
+		return nil, err
 	}
 
-	n, err := io.Copy(compressed, bytes.NewReader([]byte("Hello World!\n")))
+	_, err = io.Copy(compressed, bytes.NewReader(data))
 	if err != nil {
 		fmt.Println("Error writing encrypted filed: " + err.Error())
-		return
+		return nil, err
 	}
-	fmt.Printf("Wrote %d bytes", n)
 
 	compressed.Close()
+	plain.Close()
+	encryptedBufferWriter.Close()
+
+	return ecryptedBuffer.Bytes(), nil
 }

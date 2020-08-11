@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Environment: Get",
+			"name": "Get landing page",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -23,13 +23,40 @@
 			"response": []
 		},
 		{
-			"name": "Backup",
+			"name": "Send event",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"events\": \"UserCreated\",\n    \"venture_config_id\": \"12345678-1234-4321-1234-abcdabcdabcd\",\n    \"venture_reference\": \"87654321-4321-4321-dcba-987654321cba\",\n    \"created_at\": \"2019-11-01T08:30:00+00:00\",\n    \"culture\": \"en_GB\",\n    \"action_type\": \"api\",\n    \"action_reference\": \"123456\",\n    \"version\": \"1.0.0\",\n    \"route\": \"\",\n    \"payload\": {\n        \"Users\": [\n            {\n                \"reference\": \"123456\",\n                \"advertiser_reference\": \"\",\n                \"name\": \"Max Mustermann\",\n                \"email\": \"max.mustermann@mailinator.com\",\n                \"email_verified\": true,\n                \"mobile\": \"+1987654321\",\n                \"mobile_verified\": true,\n                \"status\": \"verified\",\n                \"products\": [],\n                \"created_at\": \"2019-11-01T08:30:00+00:00\",\n                \"updated_at\": \"2019-11-01T08:30:00+00:00\",\n                \"billing_type\": \"free\",\n                \"culture\": \"vi\",\n                \"data_properties\": {\n                    \"old_id\": \"\",\n                    \"location\": null,\n                    \"address\": [],\n                    \"alternative_contact_details\": []\n                }\n            }\n        ]\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{RSB_SERVICE_EXAMPLE}}/api/events",
+					"host": [
+						"{{RSB_SERVICE_EXAMPLE}}"
+					],
+					"path": [
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send encrpyted event",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"event\": \"TestEvent\",\n    \"payload\": {\n        \"encrypted_payload\": \"-----BEGIN Payload-----\\n\\nwcFMA0y8KRxduQU8ARAAlOrhj7zswG+P/I+GUBA0xsVEdCIo0Ye3+A2aDHckr0Hn\\nFGtRhQziNsR2ka6BWBMVoMNbp10CpqMoc/mc/Wl7qN/+wGw6M2s/4H0R6Apm2yrO\\nYMCNao3Nrow8CnpVia6BjYVC2MU0sarynkGYdjybYIh7Ptnd3L5nKqPo/GRIsHf7\\nkm5iKFoVyj2REMO8CXRcK/gR7aaF6R9ebzT0OIEKB769Hgb52ZLM8t8vv05vv4gO\\nnF2cE3KuQP/HfIkR+kSNS3rhlpKmFD7/OV1igyH1hfeqWL5TeyzUAGomp5d1BT0w\\nwuhLef+eq3B0YJMdju5Ark30Jwpqx13TEi6U4lVhmXqFogmZEW6RoUay9Y7XPIZV\\nYX2E1FaDKP13iwodLpHQw0jplIyQzbRIptVucHmUw8HulU937ExjX6kg6gJfGWmH\\nTayDISCpiO2H9mQwCVe03UVM3gQYEBspIKGiZB6F311QhsHyjimVsu+8n5lVVpzV\\n/ZaMJNqkiwuMwc9Kbjb+rGe3G9NW+4UxcTs/b+iBa+itZrNMNj+73uWMY0bKOKPp\\nLe0Vz9G7a5cl3OXrXOhXwp97/vpYve8v8ZxO5BWGtZPXIr6RDZeNI6zfSV0pLDwt\\noDf7Rf6GqsVRzELnL+ZTF7pQlxPR2Il7yPquwES9fNPTWRuUtA3BMUdb2blxi4rS\\n5gEiU9lJa+vmXeewfOyFCijtf6ZSDOB2V5Or+eazuCbV7YTPGtyx0GMxnyJHCYoo\\nKX7M4RwHnnFFBeMwXYSoJV3kyTdLDDipZ6hx9a4gnz1EB+HF5gA=\\n=zZZk\\n-----END Payload-----\"\n    }\n}",
 					"options": {
 						"raw": {
 							"language": "json"

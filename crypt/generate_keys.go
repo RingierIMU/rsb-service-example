@@ -4,13 +4,8 @@ import (
 	"crypto/rand"
 	"crypto/rsa"
 	"fmt"
-	"golang.org/x/crypto/openpgp"
-	"golang.org/x/crypto/openpgp/armor"
-	"golang.org/x/crypto/openpgp/packet"
-	"io"
 	"os"
 	"path/filepath"
-	"time"
 )
 
 func generateKeys() {
@@ -33,32 +28,4 @@ func generateKeys() {
 
 	encodePrivateKey(privKeyFile, key)
 	encodePublicKey(pubKeyfile, key)
-}
-
-func encodePrivateKey(out io.Writer, key *rsa.PrivateKey) {
-	w, err := armor.Encode(out, openpgp.PrivateKeyType, make(map[string]string))
-	if err != nil {
-		fmt.Println("Unable to save private key: " + err.Error())
-	}
-	defer w.Close()
-
-	pgpKey := packet.NewRSAPrivateKey(time.Now(), key)
-	err = pgpKey.Serialize(w)
-	if err != nil {
-		fmt.Println("Unable to serialize private key: " + err.Error())
-	}
-}
-
-func encodePublicKey(out io.Writer, key *rsa.PrivateKey) {
-	w, err := armor.Encode(out, openpgp.PublicKeyType, make(map[string]string))
-	if err != nil {
-		fmt.Println("Unable to save public key: " + err.Error())
-	}
-	defer w.Close()
-
-	pgpKey := packet.NewRSAPublicKey(time.Now(), &key.PublicKey)
-	err = pgpKey.Serialize(w)
-	if err != nil {
-		fmt.Println("Unable to serialize public key: " + err.Error())
-	}
 }

@@ -32,3 +32,18 @@ Variables that can / should be set:
 
 * PORT - The HTTP port to listen on
 * RSB_ENV - The name of the environment that the service is deployed in
+
+## Encryption
+
+Please see [End to end encryption on Ringier Event Bus](https://docs.google.com/document/d/1YfHAeQeU_N1zjeX5TKFSatqHgl7_EvUymaZH32gKudI) 
+for an overview of how the encryption works in principle.
+
+In this service, a keypair is automatically generated if none is present. Incoming events are decrypted, only if they
+are encrypted. If not, the plaintext payload is used.
+
+The service prints the (decrypted) payload to Stdout, along with an encrypted payload wrapped in a callback event.
+
+In the real world, the service would need to have the public key of the receiver
+(which it can get from the servicerepository e.g.).
+
+To test the decryption, you can copy & paste the callback event into Postman and send it to the service.

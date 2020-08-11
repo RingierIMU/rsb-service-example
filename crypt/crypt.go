@@ -2,6 +2,7 @@ package crypt
 
 const (
 	defaultKeyLength = 4096
+	BlockType        = "Payload"
 )
 
 var (
@@ -13,9 +14,7 @@ var (
 )
 
 func init() {
-	//generateKeys()
-
-	encryptToFile("/Users/zebroc/go/src/github.com/RingierIMU/rsb-service-example/file.txt")
-
-	decryptFromFile("/Users/zebroc/go/src/github.com/RingierIMU/rsb-service-example/file.txt")
+	if keysMissing() {
+		generateKeys()
+	}
 }
