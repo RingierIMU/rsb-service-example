@@ -79,7 +79,7 @@ func eventsHandler(w http.ResponseWriter, req *http.Request) {
 	if errEncrypt != nil {
 		fmt.Println("Error encrypting payload: " + errEncrypt.Error())
 	} else {
-		fmt.Printf("Encrypted %s to:\n%s", message, string(encryptedPayload))
+		fmt.Printf("Encrypted %s to:\n%s\n", message, string(encryptedPayload))
 	}
 	pl, errMarshalPl := json.Marshal(rsb.EncryptedPayload{
 		Payload: string(encryptedPayload),
